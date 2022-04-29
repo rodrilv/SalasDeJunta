@@ -53,6 +53,18 @@ export default function Cards({
     }
   };
 
+  const eliminarSala = async () =>{
+    const {data, error } = await supabase
+    .from("salas")
+    .delete()
+    .match({id: id});
+
+    if(data){
+      Swal.fire({icon: "success", text:"Eliminada Exitosamente"})
+    }else if(error){
+      Swal.fire({icon: "error", text:"Hubo un error al eliminar..."})
+    }
+  }
   
   //Esta función nos da como resultado el tiempo actual.
   //
@@ -108,6 +120,7 @@ export default function Cards({
             Reservar
           </Button>
           <Button onClick={() => liberarSala()}>Liberar</Button>
+          <Button onClick={() => eliminarSala()}>Eliminar</Button>
         </CardActions>
       </Card>
       <ReservaSalaCofig
