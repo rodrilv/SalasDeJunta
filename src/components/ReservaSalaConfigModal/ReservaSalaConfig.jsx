@@ -18,61 +18,57 @@ const paperStyle = {
 let d, h, m;
 //Definición de Dependencias, Componentes y Propiedades.
 
-
 export default function ReservaSalaCofig({ id, open, handleClose }) {
   //Inicialización de Funciones, Estados...
   const [value, setValue] = useState();
-  
-//Volvemos a definir esta función, para que trabaje independientemente de otros componentes.
+
+  //Volvemos a definir esta función, para que trabaje independientemente de otros componentes.
   const getTheTime = () => {
     d = new Date();
     h = d.getHours();
     m = d.getMinutes();
   };
-//Esta función reserva la sala que se desee seleccionar, asignando el status como ocupada
+  //Esta función reserva la sala que se desee seleccionar, asignando el status como ocupada
   const reservarSala = async () => {
     const { data, error } = await supabase
       .from("salas")
       .update({ status: "Ocupada" })
       .match({ id: id });
 
-      if(data){
-
-      }else if(error){
-
-      }
-  };
-//Esta función asigna el tiempo actual, que es la hora inicial de reserva
-  const asignarTiempo = async () => {
-    const { data, error } = await supabase.from("salas")
-    .update({startHour: h, startMin: m}).match({id: id});
-
-    if(data){
-
-    }else if(error){
-
+    if (data) {
+    } else if (error) {
     }
-    
+  };
+  //Esta función asigna el tiempo actual, que es la hora inicial de reserva
+  const asignarTiempo = async () => {
+    const { data, error } = await supabase
+      .from("salas")
+      .update({ startHour: h, startMin: m })
+      .match({ id: id });
+
+    if (data) {
+    } else if (error) {
+    }
   };
   //Esta función calcula el máximo tiempo para reservar que son (2)* horas.
-  const calcularTiempo = async () =>{
-    const { data, error } = await supabase.from("salas")
-    .update({endHour: h+value, endMin: m}).match({id: id});
+  const calcularTiempo = async () => {
+    const { data, error } = await supabase
+      .from("salas")
+      .update({ endHour: h + value, endMin: m })
+      .match({ id: id });
 
-    if(data){
-
-    }else if(error){
-
+    if (data) {
+    } else if (error) {
     }
   };
-//Esta función manda a llamar a las anteriores para asignar correctamente el estado completo
-//de la reservación de una sala de juntas.
+  //Esta función manda a llamar a las anteriores para asignar correctamente el estado completo
+  //de la reservación de una sala de juntas.
   const completarReserva = async () => {
     getTheTime();
     await reservarSala();
     await asignarTiempo();
     await calcularTiempo();
-  }
+  };
 
   const handleChange = (event) => {
     setValue(event.target.value);

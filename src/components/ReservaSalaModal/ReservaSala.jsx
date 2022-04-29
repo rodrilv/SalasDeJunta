@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 import { supabase } from "../../config/supabase";
 import Swal from "sweetalert2";
-import {
-  Modal,
-  Typography,
-  TextField,
-  Paper,
-  Button,
-} from "@mui/material";
+import { Modal, Typography, TextField, Paper, Button } from "@mui/material";
 const paperStyle = {
   padding: 20,
   height: "70vh",
@@ -16,7 +10,6 @@ const paperStyle = {
   borderRadius: "20px",
 };
 //Definición de las Dependencias, Propiedades...
-
 
 export default function ReservaSala({ open, handleClose }) {
   //Definimos los estados, objetos y funciones.
