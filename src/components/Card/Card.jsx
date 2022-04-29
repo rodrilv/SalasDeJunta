@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Card,
   CardContent,
@@ -52,21 +52,28 @@ export default function Cards({
     } else if (error) {
     }
   };
+
+  const liberarSalaTiempo = () =>{
+    getTheTime();
+    if(h >= endHour && m >= endMin){
+      liberarSala();
+    }else{
+
+    }
+  }
+
+  useEffect(()=>{
+    liberarSalaTiempo();
+  })
   //Esta función nos da como resultado el tiempo actual.
   //
-  const getTheTime = useCallback(() => {
+  const getTheTime = () =>{
     d = new Date();
     h = d.getHours();
     m = d.getMinutes();
-  }, []);
+  }
+  
 
-  useEffect(() => {
-    getTheTime();
-    if (m >= endMin && h >= endHour) {
-      liberarSala();
-    } else {
-    }
-  }, []);
   //Retornamos la vista, el componente que muestra la información de las salas de juntas
   return (
     <>
