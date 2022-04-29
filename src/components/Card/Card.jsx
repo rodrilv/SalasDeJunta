@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Card,
   CardContent,
@@ -53,18 +53,6 @@ export default function Cards({
     }
   };
 
-  const liberarSalaTiempo = () =>{
-    getTheTime();
-    if(h >= endHour && m >= endMin){
-      liberarSala();
-    }else{
-
-    }
-  }
-
-  useEffect(()=>{
-    liberarSalaTiempo();
-  })
   //Esta función nos da como resultado el tiempo actual.
   //
   const getTheTime = () =>{
