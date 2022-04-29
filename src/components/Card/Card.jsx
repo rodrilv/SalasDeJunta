@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Card,
   CardContent,
@@ -53,6 +53,7 @@ export default function Cards({
     }
   };
 
+  
   //Esta función nos da como resultado el tiempo actual.
   //
   const getTheTime = () =>{
@@ -60,7 +61,19 @@ export default function Cards({
     h = d.getHours();
     m = d.getMinutes();
   }
-  
+  /*eslint-disable*/
+  useEffect(()=>{
+    getTheTime();
+  },[])
+
+  useEffect(()=>{
+    if(h >= endHour && m >= endMin) {
+      liberarSala()
+    }else{
+      console.log("")
+    }
+  },[])
+  /*eslint-enable*/
 
   //Retornamos la vista, el componente que muestra la información de las salas de juntas
   return (
