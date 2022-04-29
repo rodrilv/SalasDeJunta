@@ -15,10 +15,13 @@ const paperStyle = {
   margin: "90px auto",
   borderRadius: "20px",
 };
+//Definición de las Dependencias, Propiedades...
+
 
 export default function ReservaSala({ open, handleClose }) {
+  //Definimos los estados, objetos y funciones.
   const [sala, setSala] = useState("");
-
+  //Esta función se encarga de crear una nueva sala.
   const addSala = async () => {
     let { data, error } = await supabase.from("salas").insert([
       {
@@ -26,14 +29,14 @@ export default function ReservaSala({ open, handleClose }) {
         nombre: sala,
       },
     ]);
-
+    //Verificamos que la petición se haya completado exitosamente.
     if (data) {
       Swal.fire({ title: "Sala Registrada", icon: "success" });
     } else if (error) {
       Swal.fire({ title: "Un error ocurrió", icon: "error" });
     }
   };
-
+  //Retornamos el componente modal que permitirá añadir una nueva sala.
   return (
     <Modal
       style={{ zIndex: 11 }}

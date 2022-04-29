@@ -10,7 +10,9 @@ import ReservaSalaCofig from "../../components/ReservaSalaConfigModal";
 import { supabase } from "../../config/supabase";
 import Swal from "sweetalert2";
 let d, h, m;
+//Definición de Dependencias, Componentes y Propiedades.
 
+//exportación del componente Cards con sus respectivas props.
 export default function Cards({
   id,
   nombre,
@@ -20,6 +22,7 @@ export default function Cards({
   endHour,
   endMin,
 }) {
+  //Inicialización de Funciones, Estados, Objetos...
   const [openModal2, setOpenModal2] = useState(false);
   const handleOpenModal2 = () => {
     if (status === "Disponible") {
@@ -32,6 +35,8 @@ export default function Cards({
     setOpenModal2(false);
   };
 
+  //Función que libera una sala que esté siendo ocupada, asignandola como
+  //disponible y limpiando sus horarios establecidos.
   const liberarSala = async () => {
     const { data, error } = await supabase
       .from("salas")
@@ -47,7 +52,8 @@ export default function Cards({
     } else if (error) {
     }
   };
-
+  //Esta función nos da como resultado el tiempo actual.
+  //
   const getTheTime = useCallback(() => {
     d = new Date();
     h = d.getHours();
@@ -61,6 +67,7 @@ export default function Cards({
     } else {
     }
   }, []);
+  //Retornamos la vista, el componente que muestra la información de las salas de juntas
   return (
     <>
       <Card sx={{ marginTop: 10, marginLeft: 10, maxWidth: 275 }}>
