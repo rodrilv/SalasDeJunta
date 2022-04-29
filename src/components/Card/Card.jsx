@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   Card,
   CardContent,
@@ -48,19 +48,19 @@ export default function Cards({
     }
   };
 
-  const getTheTime = () => {
+  const getTheTime = useCallback(() => {
     d = new Date();
     h = d.getHours();
     m = d.getMinutes();
-  };
+  }, []);
 
   useEffect(() => {
     getTheTime();
-    if (h >= endHour) {
+    if (m >= endMin && h >= endHour) {
       liberarSala();
     } else {
     }
-  }, [h]);
+  }, []);
   return (
     <>
       <Card sx={{ marginTop: 10, marginLeft: 10, maxWidth: 275 }}>
