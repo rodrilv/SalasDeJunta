@@ -37,6 +37,7 @@ export default function ReservaSalaCofig({ id, open, handleClose }) {
 
     if (data) {
     } else if (error) {
+      console.error(error)
     }
   };
   //Esta función asigna el tiempo actual, que es la hora inicial de reserva
@@ -48,6 +49,7 @@ export default function ReservaSalaCofig({ id, open, handleClose }) {
 
     if (data) {
     } else if (error) {
+      console.error(error)
     }
   };
   //Esta función calcula el máximo tiempo para reservar que son (2)* horas.
